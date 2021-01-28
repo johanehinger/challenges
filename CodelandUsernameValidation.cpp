@@ -9,19 +9,38 @@
 //    character.
 // 4. It cannot end with an underscore character.
 
-// If the username is valid then your program should return the 
-// string true, otherwise return the string false.
+// If the username is valid then your program should return 
+// true, otherwise return the false.
 
 #include <string>
 #include <iostream>
+#include <iomanip>
+#include <cctype>
 
-std::string codelandUsernameValidation(std::string str) {
-  
-  return str;
+bool codelandUsernameValidation(std::string str) {
+  if (str.size() >= 4 && str.size() <= 25)
+  {
+    for (auto c : str)
+    {
+      if (!std::isalpha(c) && !std::isdigit(c))
+      {
+        if (c != '_')
+        {
+          return false;
+        }
+      }
+    }
+    if (!std::isalpha(str[0]) || str[str.size()-1] == '_')
+    {
+      return false;
+    }
+    return true;
+  }
+  return false;
 }
 
 int main( int argc, char* argv[] )
 {
-    std::cout << codelandUsernameValidation(argv[1]) << std::endl;
+    std::cout << std::boolalpha << codelandUsernameValidation(argv[1]) << std::endl;
     return 0;
 }
